@@ -9,7 +9,9 @@ class Solution:
             for brick in row[:-1]:
                 sum += brick # total number of collision at each col
                 lines[sum] = lines.get(sum,0) + 1 
-        if len(lines) < 1:
+                
+        if len(lines) < 1: # no collision at all?
             return len(wall)
+        
         else:
             return len(wall) - max(lines.values())
