@@ -33,6 +33,9 @@ class Solution {
         // return arr[p] + k - (arr[p] - (p + 1)); 
         // k - (arr[p] - (p + 1))： 往后数几个
         //return k + p + 1; // 化简后
-        return arr[p] - (p + 1) < k ? arr[p] + k - (arr[p] - (p + 1)) : k; 
+        
+        // return arr[p] - (p + 1) < k ? arr[p] + k - (arr[p] - (p + 1)) : k; 
+        return arr[p] - (p + 1) < k ? k + p + 1 : k; // 精简版
     }
 }
+
