@@ -1,5 +1,9 @@
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
+        # grokking: Find the Smallest Missing Positive Number
+        # TC: O(N)
+        # SC: O(1)
+        
         i, n = 0, len(nums)
         while i < n:
             j = nums[i] - 1
