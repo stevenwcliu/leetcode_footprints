@@ -6,8 +6,7 @@ class Solution:
         p, q = 0, n - 1
         # while p < q: -> wrong
         while p <= q:
-            # mid = p + ( q - p ) / 2 -> 4.5
-            mid = p + ( q - p ) // 2 # -> 4
+            mid = p + ( q - p ) // 2
             if nums[mid] == target:
                 return mid
             if target < nums[mid]:
