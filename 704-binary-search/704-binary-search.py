@@ -1,8 +1,8 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         # 大神模版
-        # p, q = 0, n - 1 -> can't pass case: 1, 1
         n = len(nums)
+        # p, q = 0, n -> wrong
         p, q = 0, n - 1
         # while p < q: -> wrong
         while p <= q:
