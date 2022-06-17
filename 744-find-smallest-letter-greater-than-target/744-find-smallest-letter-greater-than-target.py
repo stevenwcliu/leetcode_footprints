@@ -1,15 +1,18 @@
 class Solution:
-    def nextGreatestLetter(self, letters: List[str], key: str) -> str:
-        # grok + 大神namings
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        # 仿大神
         n = len(letters)
 
         p, q = 0, n - 1
-        while p <= q:
+        while p < q:
             mid = p + (q - p) // 2
-            if key < letters[mid]:
-                q = mid - 1
-            else: # key >= letters[mid]:
+            if letters[mid] > target: # 看题意
+                q = mid
+            else: # target at right
                 p = mid + 1
-
-        # since the loop is running until 'start <= end', so at the end of the while loop, 'start == end+1'
-        return letters[p % n]
+        # p == q
+        # return letters[p % n]
+        if target < letters[p]:
+            return letters[p]
+        else:
+            return letters[0]
