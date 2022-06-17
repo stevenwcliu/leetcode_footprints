@@ -11,7 +11,7 @@ class Solution:
             else: # target at right
                 p = mid + 1
         # p == q
-        # return letters[p % n] # w
+
         # if target < letters[p]:
         #     return letters[p]
         # else:
