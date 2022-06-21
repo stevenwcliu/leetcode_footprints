@@ -1,12 +1,14 @@
 class Solution:
-    # 云神
+    
     def searchRange(self, nums: List[int], target: int) -> List[int]:
+        # 云神
+        res = [-1, -1]    
         n = len(nums)
         p, q = 0, n - 1
         
-        if n == 0:
-            # wrong: return {-1, -1}
-            return [-1, -1]
+        # corner cases check
+        if n == 0 or nums == None:
+            return res
         
         while p < q:
             mid = p + (q - p) // 2
@@ -16,13 +18,24 @@ class Solution:
                 q = mid
         
         if nums[p] != target:
-            return [-1, -1]
-        p0 = p
+            return res
+        
+        # p0 = p
+        res[0] = p
         q = n - 1
+        
         while p < q:
             mid = p + (q - p) // 2
             if nums[mid + 1] > target:
                 q = mid
             else:
                 p = mid + 1
-        return [p0, p]
+        
+        if nums[p] == target:
+            res[1] = p
+        return res
+
+        # yaoyao
+        
+        
+    
