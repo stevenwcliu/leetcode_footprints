@@ -2,6 +2,7 @@ class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
         # find left bound
         
+        # wrong: p, q = 0, len(nums) - 1
         p, q = 0, len(nums)
         
         while p < q:
