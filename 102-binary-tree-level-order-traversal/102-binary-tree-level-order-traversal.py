@@ -11,11 +11,6 @@ class Solution:
         
         # "BQ" - BFS with Queue
         
-        # q = [(root)] # wrong?
-        
-        # q = queue.Queue()
-        # q.put(root)
-        
         q = deque([root])
         # q = collections.deque([root]) # alt.
         res = []
@@ -25,12 +20,12 @@ class Solution:
             curLevel = []
             for _ in range(qLen):
                 node = q.popleft()
-                if node:
-                    curLevel.append(node.val)
-                    if node.left:
-                        q.append(node.left)
-                    if node.right:
-                        q.append(node.right)
+                # if node:
+                curLevel.append(node.val)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
             res.append(curLevel)
         
         return res
