@@ -21,7 +21,8 @@ class Solution:
                 if node.right:
                     q.append(node.right)
                 # find the last node of the level and add its val to res
-                if i + 1 == size:
+                # if i + 1 == size:
+                if i == size - 1: # alt
                     res.append(node.val)
         
         return res
