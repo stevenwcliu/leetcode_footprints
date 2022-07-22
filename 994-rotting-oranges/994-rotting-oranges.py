@@ -43,20 +43,19 @@ class Solution:
         
         for row in range(rows):
             for col in range(cols):
-                if grid[row][col] == 2: # rotten
+                if grid[row][col] == 2: 
                     queue.append((row, col, 0))
                     
         while queue:
             r, c, day = queue.pop(0)
             
             for nr, nc in [r+1, c], [r-1, c], [r, c+1], [r, c-1]:
-                if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1: # 1: fresh
+                if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1: 
                     queue.append((nr, nc, day + 1))
                     grid[nr][nc] = 2
-        # without: faile [[2,1,1],[0,1,1],[1,0,1]]            
+        # find if there are still fresh oranges in the grid      
         for row in grid:
             if 1 in row:
                 return -1
-        
             
         return day
