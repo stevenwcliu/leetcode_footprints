@@ -53,10 +53,10 @@ class Solution:
                 if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1: # 1: fresh
                     queue.append((nr, nc, day + 1))
                     grid[nr][nc] = 2
-                    
+        # without: faile [[2,1,1],[0,1,1],[1,0,1]]            
         for row in grid:
             if 1 in row:
                 return -1
-        # without: faile [[2,1,1],[0,1,1],[1,0,1]]
+        
             
         return day
