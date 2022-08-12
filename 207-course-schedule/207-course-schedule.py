@@ -1,28 +1,27 @@
-# nc
+# TC O(N^2)
+# SC O(N)
+# fuxuemingzhu 方法一：拓扑排序，BFS
 
-class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        # dfs
-        preMap = { i:[] for i in range(numCourses)} 
-        
-        # map each course to : prereq list
-        for crs, pre in prerequisites:
-            preMap[crs].append(pre)
-        
-        visiting = set()
-        def dfs(crs):
-            if crs in visiting:
-                return False
-            if preMap[crs] == []:
-                return True
-            
-            visiting.add(crs)
-            for pre in preMap[crs]:
-                if not dfs(pre): return False
-            visiting.remove(crs)
-            preMap[crs] = []
-            return True
-        
-        for c in range(numCourses):
-            if not dfs(c): return False
+class Solution(object):
+    def canFinish(self, N, prerequisites):
+        """
+        :type N,: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        graph = collections.defaultdict(list)
+        indegrees = collections.defaultdict(int)
+        for u, v in prerequisites:
+            graph[v].append(u)
+            indegrees[u] += 1
+        for i in range(N):
+            zeroDegree = False
+            for j in range(N):
+                if indegrees[j] == 0:
+                    zeroDegree = True
+                    break
+            if not zeroDegree: return False
+            indegrees[j] = -1
+            for node in graph[j]:
+                indegrees[node] -= 1
         return True
