@@ -7,6 +7,10 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         # bst 不能有相同value的node
+        
+        # concept refresh
+        # BST: left < root and right > root
+        
         def valid(node, left, right):
             if not node: # empty tree is a valid bst
                 return True
