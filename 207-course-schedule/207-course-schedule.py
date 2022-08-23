@@ -49,9 +49,6 @@ class Solution:
                 if inDegree[child] == 0:
                     sources.append(child)
         
-        if len(sortedOrder) != vertices:
-            return False
-        else:
-            return True
+        return len(sortedOrder) == vertices
                 
         
