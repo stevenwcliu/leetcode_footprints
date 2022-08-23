@@ -1,69 +1,52 @@
-# TC O(N^2)
-# SC O(N)
-# fuxuemingzhu 方法一：拓扑排序，BFS
+# ref: 
+# fuxuemingzhu
+# 103 w7 warm-up
+# grokking
 
-from collections import defaultdict
-
-class Solution(object):
-    '''
-    def canFinish(self, N, prerequisites):
-        """
-        :type N,: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
-        graph = defaultdict(list) # courseDict
-        indegrees = defaultdict(int)
+# Aug 23 based on grokking
+# https://www.educative.io/courses/grokking-the-coding-interview/m25rBmwLV00
+from collections import deque
+class Solution:
+    def canFinish(self, vertices: int, edges: List[List[int]]) -> bool:
+        # numCources: vertices
+        # prerequisites: edges
         
-        for u, v in prerequisites:
-            graph[v].append(u) # u: next course, v: prev course
-            indegrees[u] += 1
-            
-        print("graph: ", graph) # {0: [1]}
-        print("indegrees: ", indegrees) # {1:1}
+        sortedOrder = []
+        # corner case check
+        if vertices <= 0:
+            return sortedOrder
         
-        # build graph - ref from nc
-        # preMap = { i:[] for i in range(N)} 
-        # for crs, pre in prerequisites:
-        #     preMap[crs].append(pre)
-        # print("preMap: ", preMap) # {0: [], 1: [0]}
+        # a. initialize the graph
+        graph = {i: [] for i in range(vertices)} # adj list graph
+        inDegree = {i: 0 for i in range(vertices)} # cnt of incoming degrees
         
-        for i in range(N):
-            zeroDegree = False
-            for j in range(N):
-                if indegrees[j] == 0:
-                    zeroDegree = True
-                    break
-            if not zeroDegree: return False
-            indegrees[j] = -1
-            for node in graph[j]:
-                indegrees[node] -= 1
-        return True
-    
-    '''
-
-    # 103 w7 warm-up
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        ad_list = {i: set() for i in range(numCourses)}
-        degrees = [0] * numCourses
-        for prereq, course in prerequisites:
-            ad_list[prereq].add(course)
-            degrees[course] += 1
+        # b. build the graph
+        for edge in edges:
+            parent, child = edge[1], edge[0] # talored based on input
+            graph[parent].append(child) # put child into its parent's list
+            inDegree[child] += 1
         
-        eligibleCourses = []
-        for course in range(numCourses):
-            if degrees[course] == 0:
-                eligibleCourses.append(course)
+        # c. Find all sources(vertices with 0 indegree)
+        sources = deque()
+        for key in inDegree:
+            if inDegree[key] == 0:
+                sources.append(key)
         
-        i = 0
-        while i < len(eligibleCourses):
-            next_course = eligibleCourses[i]
-
-            for course in ad_list[next_course]:
-                degrees[course] -= 1
-                if degrees[course] == 0:
-                    eligibleCourses.append(course)
-            
-            i += 1
+        # d. For each source, add it to the sortedOrder and subtract one from all its' children's indegrees
+        # if a child's in-degree becomes 0, add it to the sources queue
         
-        return len(eligibleCourses) == numCourses
+        while sources:
+            vertex = sources.popleft()
+            sortedOrder.append(vertex)
+            # get the node's children to decrement their in-degrees
+            for child in graph[vertex]: # review
+                inDegree[child] -= 1
+                if inDegree[child] == 0:
+                    sources.append(child)
+        
+        if len(sortedOrder) != vertices:
+            return False
+        else:
+            return True
+                
+        
