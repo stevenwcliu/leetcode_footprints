@@ -5,6 +5,10 @@
 
 # Aug 23 based on grokking
 # https://www.educative.io/courses/grokking-the-coding-interview/m25rBmwLV00
+
+# TC: O(V + E), in step d, each vertex will become a source only once and each edge will be accessed and removed once.
+
+# SC: O(V + E), since we are storing all of the edges for each vertex in an adjacency list.
 from collections import deque
 class Solution:
     def canFinish(self, vertices: int, edges: List[List[int]]) -> bool:
@@ -22,6 +26,7 @@ class Solution:
         
         # b. build the graph
         for edge in edges:
+            # parent, child = edge[0], edge[1] # template
             parent, child = edge[1], edge[0] # talored based on input
             graph[parent].append(child) # put child into its parent's list
             inDegree[child] += 1
@@ -34,7 +39,7 @@ class Solution:
         
         # d. For each source, add it to the sortedOrder and subtract one from all its' children's indegrees
         # if a child's in-degree becomes 0, add it to the sources queue
-        
+        # TC: O(V + E), each vertex will become a source only once and each edge will be accessed and removed once.
         while sources:
             vertex = sources.popleft()
             sortedOrder.append(vertex)
