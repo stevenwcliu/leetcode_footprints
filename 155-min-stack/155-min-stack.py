@@ -1,5 +1,7 @@
 class MinStack:
-
+    # tc O(1)
+    # sc O(n)
+    
     def __init__(self):
         self.stack = [(None, float("inf"))]
 
