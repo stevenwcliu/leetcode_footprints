@@ -30,22 +30,23 @@
 
 class Solution:
     def numberOfSubstrings(self, s: str) -> int:
-        count = collections.Counter()
-        print(count)
+        # count = collections.Counter()
+        # print(count)
+        char_freq = {}
         l, r = 0, 0
         res = 0
 
         while r < len(s):
-            if s[r] not in count:
-                count[s[r]] = 1
-            else:
-                count[s[r]] += 1
+            if s[r] not in char_freq:
+                char_freq[s[r]] = 0
+            
+            char_freq[s[r]] += 1
 
-            while len(count) == 3 and min(count.values()) >= 1:
+            while len(char_freq) == 3 and min(char_freq.values()) >= 1:
                 res += len(s) - r
-                count[s[l]] -= 1
-                if count[s[l]] == 0:
-                    del count[s[l]]
+                char_freq[s[l]] -= 1
+                if char_freq[s[l]] == 0:
+                    del char_freq[s[l]]
                 l += 1
             r += 1
         return res
