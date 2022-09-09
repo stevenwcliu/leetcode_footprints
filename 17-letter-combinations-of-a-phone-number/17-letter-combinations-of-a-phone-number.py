@@ -17,7 +17,8 @@ class Solution:
 
         def dfs(self, path, res):
             if len(path) == len(digits):
-                res.append(''.join(path))
+                res.append(''.join(path)) # -> ["ad"]
+                # res.append(path[:]) # doesn't work -> ["a", "d"]
                 return
 
             next_number = digits[len(path)]
