@@ -13,5 +13,3 @@ class OrderedStream:
             ans.append(self.data[self.ptr])
             self.ptr += 1
         return ans
-
-
